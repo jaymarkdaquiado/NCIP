@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCIP</title>
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS STYLES (One-Page Integration) */
+        
+        * { 
+            scrollbar-width: none; 
+            box-sizing: border-box; 
+        } 
+
+        /* Universal Styles and Basic Reset */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Slightly modern font */
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            font-size: 1.1em; /* Increased base font size for better readability on desktop */
+        }
+        
+        p, li {
+            font-size: 1.1em; /* Ensure all main text is larger */
+        }
+
+        /* NAVIGATION MENU */
+        nav {
+            background-color: #388e3c;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Deeper shadow for the sticky menu */
+            padding: 0 20px;
+        }
+
+        /* Mobile Menu Toggle Setup */
+        #menu-toggle {
+            display: none; 
+        }
+
+        .menu-icon {
+            display: none;
+            color: white;
+            font-size: 1.5em;
+            padding: 15px 0;
+            cursor: pointer;
+            float: right; 
+        }
+        
+        nav::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #004d40;
+            border-bottom: 3px solid #66bb6a; /* Added accent hover */
+        }
+
+        /* HEADER Styling - ENHANCED */
+        header {
+            /* Placeholder for a hero image with a relevant theme */
+            background-image: linear-gradient(rgba(0, 77, 64, 0.7), rgba(0, 77, 64, 0.7)), url('header-bg.jpg'); /* ADD YOUR BACKGROUND IMAGE HERE */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 20px 60px; /* Increased padding */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 3.5em; /* Increased size */
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-style: italic;
+            font-size: 1.4em; /* Increased size */
+            font-weight: 300;
+        }
+
+        /* MAIN Content Styling */
+        main {
+            max-width: 1000px;
+            margin: 40px auto; /* Increased margin */
+            padding: 0 20px;
+        }
+
+        /* SECTION Styling */
+        section {
+            background-color: white;
+            padding: 35px; /* Increased padding */
+            margin-bottom: 30px; /* Increased margin */
+            border-radius: 12px; /* Smoother corners */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Clearer section distinction */
+            border-top: 5px solid #66bb6a; /* Subtle accent line */
+        }
+
+        section h2 {
+            color: #004d40;
+            border-bottom: 3px solid #66bb6a;
+            padding-bottom: 12px;
+            margin-top: 0;
+            font-size: 2em; /* Slightly larger headings */
+            display: flex;
+            align-items: center;
+        }
+        
+        section h2 i {
+            margin-right: 12px;
+            color: #388e3c;
+        }
+
+        /* SECTION 2: List Styling */
+        #mandates li {
+            background: #e8f5e9;
+            padding: 18px; /* Increased padding */
+            margin-bottom: 12px;
+            border-left: 6px solid #388e3c; /* Thicker accent bar */
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        
+        #mandates li:hover {
+            background: #dce7e8; /* Subtle hover effect */
+        }
+
+        /* SECTION 3: Program Cards Styling */
+        .program-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px; /* Increased gap */
+        }
+        
+        .program-card {
+            border: none; /* Removed thin border */
+            border-top: 4px solid #00796b; /* Accent on top */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Clearer shadow */
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .program-card h3 {
+            color: #00796b;
+            margin-top: 0;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .program-card h3::before {
+            content: "\f00c"; /* Checkmark icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: #388e3c;
+            margin-right: 10px;
+        }
+
+        /* SECTION 4: Timeline/Visual Elements */
+        .timeline-box {
+            background-color: #f0f0f0;
+            padding: 25px;
+            border-left: 6px solid #004d40;
+            margin-bottom: 25px;
+            border-radius: 6px;
+        }
+
+        .image-placeholder {
+            height: 350px; /* Increased height for desktop view */
+            background-color: #ddd;
+            text-align: center;
+            line-height: 350px;
+            color: #555;
+            font-style: italic;
+            border: 1px dashed #999;
+            margin-top: 25px;
+            border-radius: 8px;
+            overflow: hidden; /* Ensure image doesn't overflow */
+        }
+        
+        .image-placeholder img {
+            max-width: 100%;
+            width: 100%; /* Ensure it fills the width */
+            height: 350px; /* Match the placeholder height */
+            object-fit: cover; /* Fill the area nicely */
+            display: block;
+            margin: 0;
+            /* Removed hardcoded height/width from HTML to fix scaling issues */
+        }
+
+        /* FOOTER Styling */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #222; /* Darker footer */
+            color: #ccc;
+            margin-top: 40px;
+            font-size: 1em;
+        }
+
+        footer a {
+            color: #66bb6a;
+            text-decoration: none;
+        }
+
+
+        /* ------------------------------------------------------------------ */
+        /* RESPONSIVE CSS: MEDIA QUERIES (KEPT FOR MOBILE FUNCTIONALITY) */
+        /* ------------------------------------------------------------------ */
+
+        @media (max-width: 768px) {
+            
+            body { font-size: 1em; }
+            p, li { font-size: 1em; }
+            
+            .menu-icon { display: block; }
+            nav ul { display: none; flex-direction: column; text-align: left; padding-bottom: 5px; }
+            #menu-toggle:checked ~ ul { display: flex; }
+            nav ul li { display: block; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+
+            header { padding: 50px 20px 30px; }
+            header h1 { font-size: 2.2em; }
+            header p { font-size: 1.2em; }
+
+            main { margin: 20px auto; padding: 0 15px; }
+            
+            section { padding: 25px; margin-bottom: 20px; border-radius: 8px; }
+            section h2 { font-size: 1.5em; }
+            
+            .image-placeholder { height: 200px; line-height: 200px; }
+            .image-placeholder img { height: 200px; object-fit: cover; }
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8em; }
+            header p { font-size: 1em; }
+            
+            .image-placeholder { height: 150px; line-height: 150px; }
+            .image-placeholder img { height: 150px; object-fit: contain; }
+        }
+    </style>
+</head>
+<body>
+    
+    <nav>
+        <input type="checkbox" id="menu-toggle"> 
+        
+        <label for="menu-toggle" class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </label>
+        
+        <ul>
+            <li><a href="#what-is-ncip">What is NCIP</a></li>
+            <li><a href="#mandates">Mandates</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+        </ul>
+    </nav>
+
+    <header id="top">
+        <h1>National Commission on Indigenous Peoples (NCIP)</h1>
+        <p>A simple guide to the agency protecting the rights of ICCs/IPs in the Philippines</p>
+    </header>
+
+    <main>
+        
+        <section id="what-is-ncip">
+            <h2><i class="fas fa-question-circle"></i> What is NCIP?</h2>
+            <p>The **National Commission on Indigenous Peoples (NCIP)** is the principal government agency in the Philippines responsible for the formulation and implementation of policies, plans, and programs to **promote and protect the rights and well-being** of Indigenous Cultural Communities/Indigenous Peoples (ICCs/IPs).</p>
+            <p>It was created by **Republic Act No. 8371**, also known as **The Indigenous Peoples' Rights Act (IPRA) of 1997**.</p>
+        </section>
+
+        <section id="mandates">
+            <h2><i class="fas fa-gavel"></i> Mandates: The Four Bundles of Rights</h2>
+            <p>The NCIP's mission is founded on four core rights guaranteed by the IPRA Law:</p>
+            <ul>
+                <li>**Right to Ancestral Domains and Lands:** Protecting and defending the ownership and possession rights over ancestral domains/lands.</li>
+                <li>**Right to Self-Governance and Empowerment:** Respecting the inherent right of ICCs/IPs to self-determination and their traditional institutions.</li>
+                <li>**Right to Social Justice and Human Rights:** Ensuring human rights protection and preventing discrimination against ICCs/IPs.</li>
+                <li>**Right to Cultural Integrity:** Preserving and protecting the culture, traditions, and historical heritage of Indigenous Peoples.</li>
+            </ul>
+        </section>
+
+        <section id="programs">
+            <h2><i class="fas fa-hands-helping"></i> Programs and Projects</h2>
+            <p>The NCIP delivers critical services to uplift ICCs/IPs. Key programs include:</p>
+            <div class="program-container">
+                <div class="program-card">
+                    <h3>Ancestral Domain Recognition</h3>
+                    <p>Facilitating the issuance of **Certificates of Ancestral Domain Title (CADT)** and Certificates of Ancestral Land Title (CALT).</p>
+                </div>
+                <div class="program-card">
+                    <h3>FPIC Process</h3>
+                    <p>Ensuring **Free and Prior Informed Consent (FPIC)** from IPs before any major development project is undertaken in their ancestral domains.</p>
+                </div>
+                <div class="program-card">
+                    <h3>Educational Assistance</h3>
+                    <p>Providing scholarships and educational support to qualified IP students to promote access to quality education and opportunities.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements">
+            <h2><i class="fas fa-trophy"></i> Achievements / Best Examples</h2>
+            <p>The NCIP continually works to secure the rights of ICCs/IPs. Here are examples of their impact:</p>
+            
+            <div class="timeline-box">
+                <h4>Timeline Highlight: ADSDPP Implementation</h4>
+                <p><strong>2020:</strong> Significant focus on the formulation of **Ancestral Domain Sustainable Development and Protection Plans (ADSDPP)**.</p>
+                <p><strong>2023:</strong> Successful resolution of a major inter-tribal boundary dispute through NCIP mediation and legal intervention.</p>
+            </div>
+            
+            <div class="image-placeholder">
+                <img src="ncip.webp" alt="Photo of NCIP activities or IP leaders"> 
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>References: RA 8371 (IPRA) and Official NCIP Documentation.</p>
+        <p>Contact Email: sample@email.com | <a href="#top">Back to Top</a></p>
+    </footer>
+
+</body>
+</html>
